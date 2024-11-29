@@ -1,0 +1,57 @@
+name: Production Deploy (Lambda & Infra)
+
+on:
+  push:
+    branches:
+      - production-env
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: '1.9.4'
+        terraform_wrapper: false
+        
+    - name: Apply latest terraform & lambda
+      run: ./scripts/deploy.sh
+
+    - name: Check for changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add .
+        if git diff-index --quiet HEAD; then
+          echo "No changes to commit."
+        else
+          # Get the current date and time
+          current_date_time=$(date +"%Y-%m-%d %H:%M:%S")
+          
+          # Get the commit hash
+          commit_hash=$(git rev-parse --short HEAD)
+          
+          # Create a commit message with date, time, and commit hash
+          commit_message="Updated Infrastructure State - ${current_date_time} - ${commit_hash}"
+          
+          # Commit and push changes
+          git commit -m "$commit_message"
+          git push origin ${{ github.ref_name }}
+        fi
