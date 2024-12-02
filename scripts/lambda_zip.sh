@@ -21,7 +21,7 @@ cp -r . $BUILD_DIR
 cd $BUILD_DIR
 
 # Create and activate a virtual environment
-virtualenv -p $PYTHON_VERSION venv
+$PYTHON_VERSION -m venv venv
 source venv/bin/activate
 
 # Install dependencies
