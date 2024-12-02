@@ -36,22 +36,3 @@ jobs:
         cd scripts
         ./deploy.sh stage-lambda-caching-service
 
-    - name: Check for changes
-      run: |
-        git add .
-        if git diff-index --quiet HEAD; then
-          echo "No changes to commit."
-        else
-          # Get the current date and time
-          current_date_time=$(date +"%Y-%m-%d %H:%M:%S")
-          
-          # Get the commit hash
-          commit_hash=$(git rev-parse --short HEAD)
-          
-          # Create a commit message with date, time, and commit hash
-          commit_message="Updated Infrastructure State - ${current_date_time} - ${commit_hash}"
-          
-          # Commit and push changes
-          git commit -m "$commit_message"
-          git push origin ${{ github.ref_name }}
-        fi
