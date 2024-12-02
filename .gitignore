@@ -5,8 +5,8 @@ build
 
 ### Terraform State ###
 # State files should be ignored on all branches except `staging-env` and `production-env`
-terraform.tfstate.d
-.terraform.lock.hcl
-terraform.tfstate
-terraform.tfstate.backup
+# terraform.tfstate.d
+# .terraform.lock.hcl
+# terraform.tfstate
+# terraform.tfstate.backup
 ### Terraform State End ###
