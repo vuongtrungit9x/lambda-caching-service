@@ -32,7 +32,7 @@ jobs:
         terraform_wrapper: false
         
     - name: Apply latest terraform & lambda
-      run: ./scripts/deploy.sh stage-lambda-caching-service
+      run: ./scripts/deploy.sh prod-lambda-caching-service
 
     - name: Check for changes
       run: |
