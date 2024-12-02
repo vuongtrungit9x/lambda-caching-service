@@ -34,7 +34,7 @@ jobs:
     - name: Apply latest terraform & lambda
       run: |
         cd scripts
-        ./scripts/deploy.sh stage-lambda-caching-service
+        ./deploy.sh stage-lambda-caching-service
 
     - name: Check for changes
       run: |
