@@ -1,3 +1,6 @@
 {
-    "token": "f08de4fa-d51b-40c1-8378-8e0579d1a9fb"
+    "token": "f08de4fa-d51b-40c1-8378-8e0579d1a9fb",
+    "snowflakeAccountName":"hda76102.us-east-1",
+	"snowflakeUserName": "ACI_USER",
+	"snowflakePassword": "NkUi9iuG7eKI"
 }

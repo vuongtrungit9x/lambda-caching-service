@@ -179,7 +179,7 @@ def fetch_data_from_analytics_provider(body):
     elif provider == "ADOBE":
         data = handle_adobe_request(search_criteria)
     elif provider == "PIXEL":
-        data = handle_pixel_request(search_criteria)
+        data = handle_pixel_request(config, search_criteria)
     else:
         # This should not happen due to validation
         raise ValueError(f"Unsupported provider: {provider}")

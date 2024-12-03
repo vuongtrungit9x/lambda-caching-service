@@ -30,6 +30,8 @@ if [ ! -f requirements.txt ]; then
     exit 1
 fi
 pip install -r requirements.txt
+yum install -y python3.9 python3.9-devel gcc
+pip install snowflake-connector-python
 
 # Copy dependencies
 cp -r venv/lib/${PYTHON_VERSION}/site-packages/* .
