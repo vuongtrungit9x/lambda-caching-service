@@ -73,6 +73,8 @@ resource "aws_lambda_function" "cache_lambda" {
     variables = {
       CACHE_BUCKET_NAME = aws_s3_bucket.cache_s3.id
       LAMBDA_FUNCTION_NAME = "${var.name}-cache-lambda"
+      TOKEN                  = var.token
+      ADOBE_API_KEY          = var.adobe_api_key
     }
   }
 }

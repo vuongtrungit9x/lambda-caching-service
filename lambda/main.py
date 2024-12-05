@@ -30,6 +30,14 @@ def validate_env_vars():
     lambda_function_name = os.getenv("LAMBDA_FUNCTION_NAME", None)
     if lambda_function_name is None:
         raise ValueError("Environment variable 'LAMBDA_FUNCTION_NAME' is required.")
+    
+    token = os.getenv("TOKEN", None)
+    if token is None:
+        raise ValueError("Environment variable 'TOKEN' is required.")
+    
+    adobe_api_key = os.getenv("ADOBE_API_KEY", None)
+    if adobe_api_key is None:
+        raise ValueError("Environment variable 'ADOBE_API_KEY' is required.")
 
 
 def validate_request(body):
