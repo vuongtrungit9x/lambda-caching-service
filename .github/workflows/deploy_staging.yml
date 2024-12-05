@@ -8,10 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      TOKEN: ${{ secrets.STAGE_TOKEN }}
-      ADOBE_API_KEY: ${{ secrets.STAGE_ADOBE_API_KEY }}
-
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -33,13 +30,11 @@ jobs:
       with:
         terraform_version: '1.9.4'
         terraform_wrapper: false
-
-    - name: Generate Terraform Variables File
-      run: |
-        echo 'token = "${{ secrets.STAGE_TOKEN }}"' >> terraform.tfvars
-        echo 'adobe_api_key = "${{ secrets.STAGE_ADOBE_API_KEY }}"' >> terraform.tfvars
         
     - name: Apply latest terraform & lambda
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
+        ADOBE_API_KEY: ${{ secrets.ADOBE_API_KEY }}
       run: |
         cd scripts
         ./deploy.sh stage-lambda-caching-service
