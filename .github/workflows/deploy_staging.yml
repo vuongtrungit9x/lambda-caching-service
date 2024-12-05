@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -32,10 +32,10 @@ jobs:
         terraform_wrapper: false
         
     - name: Apply latest terraform & lambda
-      env:
-        TOKEN: ${{ secrets.TOKEN }}
-        ADOBE_API_KEY: ${{ secrets.ADOBE_API_KEY }}
       run: |
         cd scripts
         ./deploy.sh stage-lambda-caching-service
+      env:
+        TOKEN: ${{ secrets.STAGE_TOKEN }}
+        ADOBE_API_KEY: ${{ secrets.STAGE_ADOBE_API_KEY }}
 
