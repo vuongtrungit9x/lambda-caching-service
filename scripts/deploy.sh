@@ -12,8 +12,15 @@ NAME=$1
 # Ensure S3 bucket exists for Lambda Code upload
 cd ../terraform
 terraform init
-echo "token = \"${{ secrets.TOKEN }}\"" >> terraform.tfvars
-echo "adobe_api_key = \"${{ secrets.ADOBE_API_KEY }}\"" >> terraform.tfvars
+
+# Write the variables to terraform.tfvars
+cat <<EOF > terraform.tfvars
+token = "$TOKEN"
+adobe_api_key = "$ADOBE_API_KEY"
+EOF
+
+echo "terraform.tfvars file generated successfully.
+
 terraform apply -auto-approve --var="name=$NAME" -target=aws_s3_bucket.cache_lambda_s3
 
 # Prepare Lambda Code
