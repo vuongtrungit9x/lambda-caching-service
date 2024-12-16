@@ -1,4 +1,3 @@
-lambda.zip
 .terraform/
 .DS_Store
 build
@@ -9,4 +8,6 @@ build
 # .terraform.lock.hcl
 # terraform.tfstate
 # terraform.tfstate.backup
+# lambda.zip
+
 ### Terraform State End ###
