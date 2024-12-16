@@ -22,8 +22,8 @@ NAME=$1
 cd ../terraform
 terraform init
 cat <<EOF > terraform.tfvars
-token = "$TOKEN"
-adobe_api_key = "$ADOBE_API_KEY"
+token = "$(echo "$TOKEN" | sed ':a;N;$!ba;s/\n/\\n/g')"
+adobe_api_key = "$(echo "$ADOBE_API_KEY" | sed ':a;N;$!ba;s/\n/\\n/g')"
 EOF
 
 terraform apply -auto-approve --var="name=$NAME" -target=aws_s3_bucket.cache_lambda_s3
